@@ -1,0 +1,63 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000021539365230 .scope module, "tb" "tb" 2 10;
+ .timescale 0 0;
+v000002153931ab10_0 .var "in", 3 0;
+v000002153931abb0_0 .net "p", 0 0, L_000002153931b940;  1 drivers
+S_00000215393653c0 .scope module, "dut" "evenparity" 2 13, 2 1 0, S_0000021539365230;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "in";
+    .port_info 1 /OUTPUT 1 "p";
+L_000002153931ac50 .functor XOR 1, L_0000021539362f10, L_0000021539362b50, C4<0>, C4<0>;
+L_000002153931ad50 .functor XOR 1, L_000002153931ac50, L_0000021539363230, C4<0>, C4<0>;
+L_000002153931b940 .functor XOR 1, L_000002153931ad50, L_0000021539362bf0, C4<0>, C4<0>;
+v00000215393171e0_0 .net *"_ivl_1", 0 0, L_0000021539362f10;  1 drivers
+v0000021539316d10_0 .net *"_ivl_11", 0 0, L_0000021539362bf0;  1 drivers
+v0000021539365550_0 .net *"_ivl_3", 0 0, L_0000021539362b50;  1 drivers
+v00000215393655f0_0 .net *"_ivl_4", 0 0, L_000002153931ac50;  1 drivers
+v000002153931a890_0 .net *"_ivl_7", 0 0, L_0000021539363230;  1 drivers
+v000002153931a930_0 .net *"_ivl_8", 0 0, L_000002153931ad50;  1 drivers
+v000002153931a9d0_0 .net "in", 3 0, v000002153931ab10_0;  1 drivers
+v000002153931aa70_0 .net "p", 0 0, L_000002153931b940;  alias, 1 drivers
+L_0000021539362f10 .part v000002153931ab10_0, 3, 1;
+L_0000021539362b50 .part v000002153931ab10_0, 2, 1;
+L_0000021539363230 .part v000002153931ab10_0, 1, 1;
+L_0000021539362bf0 .part v000002153931ab10_0, 0, 1;
+    .scope S_0000021539365230;
+T_0 ;
+    %vpi_call 2 15 "$dumpvars", 32'sb00000000000000000000000000000000, S_0000021539365230 {0 0 0};
+    %vpi_call 2 16 "$dumpfile", "tets.vcd" {0 0 0};
+    %pushi/vec4 10, 0, 32;
+T_0.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_0.1, 5;
+    %jmp/1 T_0.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %vpi_func 2 18 "$random" 32 {0 0 0};
+    %pushi/vec4 15, 0, 32;
+    %mod;
+    %pad/u 4;
+    %store/vec4 v000002153931ab10_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call 2 19 "$monitor", "time :  %d in =%b parity %b", $time, v000002153931ab10_0, v000002153931abb0_0 {0 0 0};
+    %jmp T_0.0;
+T_0.1 ;
+    %pop/vec4 1;
+    %delay 10, 0;
+    %vpi_call 2 22 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "main.v";
